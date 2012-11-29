@@ -5,9 +5,9 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
-  database: development
-  username: KingOfDCP # replace this with your own user name
-  password: nopass # replace this with your own password
+  database: sample_development
+  username: postgres # replace this with your own user name
+  password: your_password # replace this with your own password
   host: localhost
   encoding: UTF8
   pool: 5
@@ -18,14 +18,14 @@ development:
 # Do not set this db to the same as development or production.
 test:
   adapter: postgresql
-  database: development
-  username: KingOfDCP
-  password: nopass
+  database: sample_test
+  username: postgres
+  password: your_password
   pool: 5
   timeout: 5000
 
 production:
   adapter: postgresql
-  database: production
+  database: sample_production
   pool: 5
   timeout: 5000
