@@ -21,15 +21,28 @@ describe "Static pages" do
       let(:user) { FactoryGirl.create(:user) }
       before do
         FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
-        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
         sign_in user
-        visit root_path
+        
+      end
+
+      it "should not pluralize micropost" do
+        page.should_not have_content("microposts")
       end
 
       it "should render the user's feed" do
+        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+        visit root_path
         user.feed.each do |item|
           page.should have_selector("li##{item.id}", text: item.content)
         end
+      end
+
+      it "should have right microposts count and pluralize micropost" do
+        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet 2")
+        visit root_path
+        page.should have_content(user.microposts.count)
+        page.should have_content("microposts")
       end
     end
   end

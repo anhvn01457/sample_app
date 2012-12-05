@@ -1,7 +1,26 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#composebox").keyup(function() {
+			var box=$(this).val();
+			var count= 140 - box.length;
+
+			if(box.length <= 145) {
+				$('#count').html(count);
+			}
+			else {
+				alert(' Full ');
+			}
+			return false;
+		});
+	});
+</script>
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+  	<label id="count">140</label>
+    <%= f.text_area :content1, id: "composebox", placeholder: "Compose new micropost..." %>
   </div>
+  <div>
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+  </div>
 <% end %>
