@@ -9,10 +9,9 @@ class MicropostsController < ApplicationController
   		redirect_to root_url
   	else
       @feed_items = current_user.feed.paginate(page: params[:page])
-
-  		render 'static_pages/home'
-
-      # redirect_to root_url, notice: "error"
+      session[:micropost] = @micropost
+      redirect_to :back
+#			render 'static_pages/home'
   	end
   end
 
